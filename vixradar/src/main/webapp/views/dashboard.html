@@ -1,0 +1,305 @@
+  
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Ticker Dashboard <small>Statistics Overview</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+      
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-line-chart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{meta.symbol}} <br/>
+                                        {{meta.quote.change | currency }}
+                                        
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="http://stockcharts.com/h-sc/ui?s={{meta.symbol}}" target="_new">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-calendar  fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                        {{meta.quote.open | currency }}<br/>
+                                        {{meta.quote.price | currency }}</div>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="https://finance.yahoo.com/quote/{{meta.symbol}}?p={{meta.symbol}}" target="_new">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+ 
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-area-chart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{meta.quote.vix}}<br/>
+                                        {{meta.quote.vixChangePercent }}</div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="http://vixcentral.com/" target="_new">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-bar-chart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                        	{{meta.quote.dowChange }} <br/>
+                                        	{{meta.quote.spChange }}
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>                   
+                    
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+  
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Input Panel</h3>
+                            </div>
+                            <div class="panel-body">
+                              
+                            <form role="form">
+
+                            <div class="form-group input-group">
+                              
+                               
+                                 <select class="form-control" ng-model="symbol">
+                                    <option value="XME">XME</option>
+                                    <option value="UVXY">UVXY</option>
+                                    <option value="SVXY">SVXY</option>
+                                    <option value="VXX">VXX</option>
+                                    <option value="MUX">MUX</option>
+                                    <option value="XLE">XLE</option>
+                                    <option value="GDX">GDX</option>
+                                    <option value="AMZN">AMZN</option>
+                                    <option value="GOOG">GOOG</option>
+                                   
+                                </select>
+                              
+                                <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="loadStock()"><i class="fa fa-search"></i></button></span>
+ 								
+                            </div>
+
+                            <div class="form-group input-group">
+                            	 <span class="input-group-addon">@</span>
+                                 <select class="form-control" ng-model="expire">
+                                    <option ng-repeat = "exdate in meta.expireDates" value="{{exdate}}">{{exdate + "000" | date : "MMM d, y" : "GMT + 5"}}</option>
+                                </select>
+                               <span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="loadOptionChain()"><i class="fa fa-search"></i></button></span>
+                                
+                            </div>
+
+                        </form>
+                               
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Option Strategy Panel</h3>
+                            </div>
+                            <div class="panel-body">
+                          
+                            <form role="form">
+
+ 							<div class="form-group">
+                                <label>Strategy</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optionsRadiosInline" id="strategy1" value="single" ng-model="strategy" checked>Single
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optionsRadiosInline" id="strategy2"  ng-model="strategy" value="multi">Multi
+                                </label>
+                              
+                            </div>
+
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">1</span>
+                               
+                                <select class="form-control" ng-model="action1">
+                                    <option value="buy">Buy</option>
+                                    <option value="sell">Sell</option>
+                                </select>
+                                <select class="form-control" ng-model="option1">
+                                    <option value="call">Call</option>
+                                    <option value="put">Put</option>
+                                </select>
+                                <select class="form-control" ng-model="strike1">
+                                    <option ng-repeat = "strike in strikes1" value="{{strike}}">{{strike}}</option>
+                                </select>
+             
+                            </div>
+
+                            <div class="form-group input-group" ng-show="strategy == 'multi'">
+                                <span class="input-group-addon">2</span>
+                                  <select class="form-control" ng-model="action2">
+                                    <option value="buy">Buy</option>
+                                    <option value="sell">Sell</option>
+                                </select>
+                                <select class="form-control" ng-model="option2">
+                                    <option value="call">Call</option>
+                                    <option value="put">Put</option>
+                                </select>
+                                <select class="form-control" ng-model="strike2">
+                                    <option ng-repeat = "strike in strikes2" value="{{strike}}">{{strike}}</option>
+                                </select>
+                            </div>
+
+                         
+                            <div class="form-group input-group">
+                      			<button type="button" class="btn btn-default" ng-click="calculateStrategy();">Calculate</button>
+                            </div>
+
+                        </form>
+                  
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Strategy Graph</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-line-chart"></div>
+                                <div class="text-right">
+                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Option Chain {{chain.expire + "000" | date : "MMM d, y" : "GMT + 5"}}</h3>
+                            </div>
+                            <div class="panel-body">
+                                     <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                    <thead>
+	                                	<tr>
+											<th>Call</th>
+											<th>Bid</th>
+											<th>Ask</th>	
+											<th>Open</th>		
+										    <th>Strike</th>
+										    <th>Put</th>
+											<th>Bid</th>
+											<th>Ask</th>
+											<th>Open</th>			
+										</tr>
+									</thead>
+									<tbody>									
+										<tr ng-repeat = "option in chain.chain">
+											<td>{{option.call}}</td>
+											<td>{{option.callBid}}</td>
+											<td>{{option.callAsk}}</td>
+											<td>{{option.callIns}}
+											<td style="background-color:#cccccc;">{{option.strike}}</td>
+											<td>{{option.putBid}}</td>
+											<td>{{option.putAsk}}</td>
+											<td>{{option.put}}</td>
+											<td>{{option.putIns}}</td>
+										</tr>
+									</tbody>
+                                    </table>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+  
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+ 	<!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    
+ 
