@@ -352,12 +352,10 @@ public class OptionServiceImpl implements OptionService {
 	}
 	
 	
-	@Scheduled(cron="0 25 18 ? * MON-FRI")
+	//@Scheduled(cron="0 25 18 ? * MON-FRI")
 	public void loadVixOptions() {
 		
-		//VXX and UVXY	
-	//	loadOptions("VXX");
-	//	loadOptions("UVXY");	
+
 		
 	}
 
