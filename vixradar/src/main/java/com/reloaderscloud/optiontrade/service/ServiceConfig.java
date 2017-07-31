@@ -14,4 +14,9 @@ public class ServiceConfig {
 	public OptionService optionService() {
 		return new OptionServiceImpl();
 	}
+	
+	@Bean
+	public CloudService cloudService() {
+		return new CloudServiceImpl();
+	}
 }
