@@ -1,6 +1,7 @@
 package com.reloaderscloud.optiontrade.controller;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +19,12 @@ import com.reloaderscloud.optiontrade.bean.OptionMeta;
 import com.reloaderscloud.optiontrade.service.CloudService;
 import com.reloaderscloud.optiontrade.service.OptionService;
 
+
 @Controller
 @RequestMapping("/tasks")
 public class TaskController extends AbstractController {
-	
+	private static Logger log = Logger.getLogger(TaskController.class.getName());
+
 	@Autowired
 	OptionService optionService;
 	
@@ -38,19 +41,20 @@ public class TaskController extends AbstractController {
 	@ResponseBody
 	public void getOptionChain(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("VIX Jump!");
-		OptionMeta meta = optionService.getOptionMeta("vix");
-		if(meta.getQuote().getVixChange() > 0.01) {
+		OptionMeta meta = optionService.getOptionMeta("VXX");
+		log.info("VIX Change : " + meta.getQuote().getVixChange());
+		if(meta.getQuote().getVixChange() > 0.05) {
 			//Send email
-			cloudService.sendEmail("7038551497@sms.mycricket.com", "VIX Alert", "VIX " + meta.getQuote().getVixChangePercent());
-			cloudService.sendEmail("7037286380@tmomail.net", "VIX Alert", "VIX " + meta.getQuote().getVixChangePercent());
-			System.out.println("VIX Jump!");
+			cloudService.sendEmail("wangyu@vt.edu", "VIX Alert", "VIX " + meta.getQuote().getVixChangePercent());
+			cloudService.sendEmail("haiyuan_wang@hotmail.com", "VIX Alert", "VIX " + meta.getQuote().getVixChangePercent());
+			cloudService.sendEmail("7038551497@mms.mycricket.net", "VIX Alert", "VIX " + meta.getQuote().getVixChangePercent());
+			cloudService.sendEmail("7037286380@tmomail.net", "VIX Alert", "VIX " + meta.getQuote().getVixChangePercent());			
 		}
 		response.setStatus(200);
 		try {
 			response.getOutputStream().close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	}
 

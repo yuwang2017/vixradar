@@ -1,10 +1,10 @@
 angular.module('OptionTradeAppModule').controller('homeController', function($scope, $http, UserService, EchoService) {
 	
-	 $scope.symbol = "XME";
+	 $scope.symbol = "VXX";
 	 $scope.expire = "";
 	 $scope.strategy = "single";
 	 
-	 $http.get("servlet/getOptionMeta?symbol=XME")
+	 $http.get("servlet/getOptionMeta?symbol=VXX")
 		.then(function(response){
 			$scope.meta = response.data;
 			$scope.strikes1 = $scope.meta.strikes;

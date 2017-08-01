@@ -11,15 +11,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
-
-import org.springframework.scheduling.annotation.Scheduled;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.reloaderscloud.optiontrade.bean.DisplayData;
@@ -33,6 +31,7 @@ import com.reloaderscloud.optiontrade.util.MathUtil;
 
 
 public class OptionServiceImpl implements OptionService {
+	
 
 	private static String YAHOO_OPTION_BASE = "https://finance.yahoo.com/quote/%SYM%/options?p=%SYM%&date=%DATE%";
 
