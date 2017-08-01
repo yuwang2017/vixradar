@@ -40,7 +40,6 @@ public class TaskController extends AbstractController {
 	@RequestMapping("/checkvix")
 	@ResponseBody
 	public void getOptionChain(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("VIX Jump!");
 		OptionMeta meta = optionService.getOptionMeta("VXX");
 		log.info("VIX Change : " + meta.getQuote().getVixChange());
 		if(meta.getQuote().getVixChange() > 0.05) {
