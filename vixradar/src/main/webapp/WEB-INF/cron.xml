@@ -4,6 +4,6 @@
     <url>/servlet/tasks/checkvix</url>
     <target>beta</target>
     <description>daily summary job</description>
-    <schedule>every 5 minutes from 9:30 to 17:00 </schedule>
+    <schedule>every 50 minutes from 9:30 to 10:00 </schedule>
   </cron>
 </cronentries>

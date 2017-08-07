@@ -16,6 +16,7 @@ import com.reloaderscloud.optiontrade.bean.MorrisLineData;
 import com.reloaderscloud.optiontrade.bean.OptionChain;
 import com.reloaderscloud.optiontrade.bean.OptionMeta;
 import com.reloaderscloud.optiontrade.bean.OptionStrategy;
+import com.reloaderscloud.optiontrade.service.CloudService;
 import com.reloaderscloud.optiontrade.service.OptionService;
 
 @Controller
@@ -23,6 +24,9 @@ public class RestController extends AbstractController {
 	
 	@Autowired
 	OptionService optionService;
+	
+	@Autowired
+	CloudService cloudService;
 
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
@@ -34,6 +38,7 @@ public class RestController extends AbstractController {
 	@ResponseBody
 	public  OptionChain getOptionChain(@RequestParam String symbol, @RequestParam String expireDate){
 		//System.out.println("getOptionChain called");
+		cloudService.saveFile("", null);
 		return optionService.getOptionChain(symbol, expireDate);
 	}
 	

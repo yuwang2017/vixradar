@@ -9,6 +9,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.BucketInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+
 public class CloudServiceImpl implements CloudService  {
 	
 	private static final Logger log = Logger.getLogger(CloudServiceImpl.class.getName());
@@ -28,5 +33,33 @@ public class CloudServiceImpl implements CloudService  {
 		} catch (Exception e) {
 			log.warning(e.toString());
 		}
+	}
+	public void saveFile(String fileName, byte[] content) {
+		  // Instantiates a client
+	    Storage storage = StorageOptions.getDefaultInstance().getService();
+
+	    // The name for the new bucket
+	    String bucketName = "vix-radar.appspot.com";  // "my-new-bucket";
+
+	    // Creates the new bucket
+	    Bucket bucket = storage.get(bucketName);
+	    
+	    
+
+	    log.info("Bucket %s created at " +  bucket.getCreateTime());
+	}
+	
+	public byte[] retrieveFile(String fileName) {
+		  // Instantiates a client
+	    Storage storage = StorageOptions.getDefaultInstance().getService();
+
+	    // The name for the new bucket
+	    String bucketName = "vix-radar.appspot.com";  // "my-new-bucket";
+
+	    // Creates the new bucket
+	    Bucket bucket = storage.create(BucketInfo.of(bucketName));
+
+	    System.out.printf("Bucket %s created.%n", bucket.getName());
+		return null;
 	}
 }

@@ -161,8 +161,6 @@ limitations under the License.
 	    <artifactId>httpclient</artifactId>
 	    <version>4.5.3</version>
 	</dependency>
-	
-
     
   <dependency>
 <groupId>com.google.cloud</groupId>
@@ -269,6 +267,8 @@ limitations under the License.
 <artifactId>jackson-core-asl</artifactId>
 <version>1.9.13</version>
 </dependency>
+
+
 </dependencies>
 
   <build>
