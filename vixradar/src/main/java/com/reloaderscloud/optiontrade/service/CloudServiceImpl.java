@@ -9,6 +9,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Blob.BlobSourceOption;
 import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.BucketInfo;
 import com.google.cloud.storage.Storage;
@@ -44,7 +46,7 @@ public class CloudServiceImpl implements CloudService  {
 	    // Creates the new bucket
 	    Bucket bucket = storage.get(bucketName);
 	    
-	    
+	    bucket.create(fileName, content,  Bucket.BlobTargetOption.doesNotExist());
 
 	    log.info("Bucket %s created at " +  bucket.getCreateTime());
 	}
@@ -57,9 +59,13 @@ public class CloudServiceImpl implements CloudService  {
 	    String bucketName = "vix-radar.appspot.com";  // "my-new-bucket";
 
 	    // Creates the new bucket
-	    Bucket bucket = storage.create(BucketInfo.of(bucketName));
-
-	    System.out.printf("Bucket %s created.%n", bucket.getName());
+	    Bucket bucket = storage.get(bucketName);
+	    
+	    Blob data = bucket.get(fileName)	;  
+	    if(data != null) {
+	    	log.info(new String(data.getContent(BlobSourceOption.generationMatch())));
+	    	return data.getContent(BlobSourceOption.generationMatch());
+	    }
 		return null;
 	}
 }

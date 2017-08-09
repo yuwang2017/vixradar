@@ -1,5 +1,7 @@
 package com.reloaderscloud.optiontrade.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,7 +40,8 @@ public class RestController extends AbstractController {
 	@ResponseBody
 	public  OptionChain getOptionChain(@RequestParam String symbol, @RequestParam String expireDate){
 		//System.out.println("getOptionChain called");
-		cloudService.saveFile("", null);
+		//cloudService.saveFile("" + (new Date()).getTime(), "Hello World".getBytes());
+		cloudService.retrieveFile("1502135504989");
 		return optionService.getOptionChain(symbol, expireDate);
 	}
 	
